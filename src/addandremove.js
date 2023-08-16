@@ -12,29 +12,22 @@ class CreatetodoList {
     listItem.id = task.id;
     listItem.className = 'lists';
     listItem.innerHTML = `
-          <div class="list-Container">
-          <input type="checkbox" name="" id="${task.id}">
-          <p id="${task.id}">${task.description}</p>
-          </div>
+      <div class="list-Container">
+        <input type="checkbox" name="" id="${task.id}">
+        <p id="${task.id}">${task.description}</p>
+      </div>
           
-          <div class="trash">
-          
-          <i id="pen" class="fa-solid fa-pen"></i>
-          <i id="delete" class="fa-solid fa-trash-can"></i>
-          </div>
-          `;
+      <div class="trash">
+        <i id="pen" class="fa-solid fa-pen"></i>
+        <i id="delete" class="fa-solid fa-trash-can"></i>
+      </div>
+    `;
     TaskContainer.appendChild(listItem);
   };
 
   static loadFromLocalStorage() {
-    let Tasks;
-
-    if (localStorage.getItem('TasksInfo')) {
-      Tasks = JSON.parse(localStorage.getItem('TasksInfo'));
-    } else {
-      Tasks = [];
-    }
-    return Tasks;
+    const storedTasks = localStorage.getItem('TasksInfo');
+    return storedTasks ? JSON.parse(storedTasks) : [];
   }
 
   static displayTasksOnPage() {
@@ -52,7 +45,7 @@ class CreatetodoList {
   }
 
   static removeFromLocalStorage(element) {
-    let Tasks = CreatetodoList.loadFromLocalStorage();
+    const Tasks = CreatetodoList.loadFromLocalStorage();
 
     const idd = element.parentElement.id;
     const newID = Number(idd);

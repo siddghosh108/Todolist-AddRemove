@@ -38,13 +38,13 @@ class CreatetodoList {
     });
   }
 
-  static removeBookFromPage(target) {
+  static removeBookFromPage = target => {
     if (target.classList.contains('trash')) {
       target.parentElement.remove();
     }
-  }
+  };
 
-  static removeFromLocalStorage(element) {
+  static removeFromLocalStorage = element => {
     const Tasks = CreatetodoList.loadFromLocalStorage();
 
     const idd = element.parentElement.id;
@@ -58,7 +58,7 @@ class CreatetodoList {
     });
 
     localStorage.setItem('TasksInfo', JSON.stringify(updatedTasks));
-  }
+  };
 }
 
 export const removeItem = e => {

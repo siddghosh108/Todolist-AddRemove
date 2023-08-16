@@ -7,7 +7,7 @@ class CreatetodoList {
     this.id = id;
   }
 
-  static displayTasks = (task) => {
+  static displayTasks = task => {
     const listItem = document.createElement('li');
     listItem.id = task.id;
     listItem.className = 'lists';
@@ -33,7 +33,7 @@ class CreatetodoList {
   static displayTasksOnPage() {
     const Tasks = CreatetodoList.loadFromLocalStorage();
 
-    Tasks.forEach((task) => {
+    Tasks.forEach(task => {
       CreatetodoList.displayTasks(task);
     });
   }
@@ -52,7 +52,7 @@ class CreatetodoList {
     const updatedTasks = Tasks.filter(task => task.id !== newID);
 
     let X = 1;
-    updatedTasks.forEach((task) => {
+    updatedTasks.forEach(task => {
       task.id = X;
       X += 1;
     });
@@ -61,7 +61,7 @@ class CreatetodoList {
   }
 }
 
-export const removeItem = (e) => {
+export const removeItem = e => {
   CreatetodoList.removeBookFromPage(e.target.parentElement);
   CreatetodoList.removeFromLocalStorage(e.target.parentElement);
 };
@@ -77,7 +77,7 @@ export const addItem = () => {
     const complete = false;
 
     const loadTasks = CreatetodoList.loadFromLocalStorage();
-    const count = loadTasks.length + 1;  // Increment the count to start from 1
+    const count = loadTasks.length + 1; // Increment the count to start from 1
     const newTask = new CreatetodoList(addInput.value, complete, count);
 
     loadTasks.push(newTask);

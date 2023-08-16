@@ -52,24 +52,19 @@ class CreatetodoList {
   }
 
   static removeFromLocalStorage(element) {
-    let k = 0;
-    const Tasks = CreatetodoList.loadFromLocalStorage();
+    let Tasks = CreatetodoList.loadFromLocalStorage();
 
     const idd = element.parentElement.id;
     const newID = Number(idd);
-    for (let i = 0; i < Tasks.length; i += 1) {
-      if (Tasks[i].id === newID) {
-        k = i;
-        break;
-      }
-    }
-    Tasks.splice(k, 1);
+    const updatedTasks = Tasks.filter(task => task.id !== newID);
+
     let X = 1;
-    Tasks.forEach((task) => {
+    updatedTasks.forEach((task) => {
       task.id = X;
       X += 1;
     });
-    localStorage.setItem('TasksInfo', JSON.stringify(Tasks));
+
+    localStorage.setItem('TasksInfo', JSON.stringify(updatedTasks));
   }
 }
 
@@ -89,7 +84,7 @@ export const addItem = () => {
     const complete = false;
 
     const loadTasks = CreatetodoList.loadFromLocalStorage();
-    const count = loadTasks.length + 1;
+    const count = loadTasks.length + 1;  // Increment the count to start from 1
     const newTask = new CreatetodoList(addInput.value, complete, count);
 
     loadTasks.push(newTask);

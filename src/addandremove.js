@@ -7,7 +7,7 @@ class CreatetodoList {
     this.id = id;
   }
 
-  static displayTasks = task => {
+  static displayTasks = (task) => {
     const listItem = document.createElement('li');
     listItem.id = task.id;
     listItem.className = 'lists';
@@ -25,34 +25,34 @@ class CreatetodoList {
     TaskContainer.appendChild(listItem);
   };
 
-  static loadFromLocalStorage() {
+  static loadFromLocalStorage = () => {
     const storedTasks = localStorage.getItem('TasksInfo');
     return storedTasks ? JSON.parse(storedTasks) : [];
-  }
+  };
 
-  static displayTasksOnPage() {
+  static displayTasksOnPage = () => {
     const Tasks = CreatetodoList.loadFromLocalStorage();
 
-    Tasks.forEach(task => {
+    Tasks.forEach((task) => {
       CreatetodoList.displayTasks(task);
     });
-  }
+  };
 
-  static removeBookFromPage = target => {
+  static removeBookFromPage = (target) => {
     if (target.classList.contains('trash')) {
       target.parentElement.remove();
     }
   };
 
-  static removeFromLocalStorage = element => {
+  static removeFromLocalStorage = (element) => {
     const Tasks = CreatetodoList.loadFromLocalStorage();
 
     const idd = element.parentElement.id;
     const newID = Number(idd);
-    const updatedTasks = Tasks.filter(task => task.id !== newID);
+    const updatedTasks = Tasks.filter((task) => task.id !== newID);
 
     let X = 1;
-    updatedTasks.forEach(task => {
+    updatedTasks.forEach((task) => {
       task.id = X;
       X += 1;
     });
@@ -61,7 +61,7 @@ class CreatetodoList {
   };
 }
 
-export const removeItem = e => {
+export const removeItem = (e) => {
   CreatetodoList.removeBookFromPage(e.target.parentElement);
   CreatetodoList.removeFromLocalStorage(e.target.parentElement);
 };
